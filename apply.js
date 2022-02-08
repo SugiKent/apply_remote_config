@@ -1,10 +1,8 @@
 const fs = require("fs");
 const { initializeApp, applicationDefault } = require("firebase-admin/app");
 const { getRemoteConfig } = require("firebase-admin/remote-config");
-const jsonDiff = require("json-diff");
 const core = require("@actions/core");
 const github = require("@actions/github");
-const { context } = require("@actions/github");
 
 async function main() {
   try {
