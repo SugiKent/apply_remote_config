@@ -23,11 +23,11 @@ async function main() {
 
     let localConfigFile = "";
     try {
-      localConfigFile = JSON.parse(
-        fs.readFileSync("/github/workspace/remote_config.json")
-      );
       const config = getRemoteConfig();
-      currentConfig = await config.publishTemplate(localConfigFile);
+      template = config.createTemplateFromJSON(
+        fs.readFileSync("/github/workspace/remote_config.json", "UTF8")
+      );
+      currentConfig = await config.publishTemplate(template);
     } catch (err) {
       console.error(err);
       throw err;
