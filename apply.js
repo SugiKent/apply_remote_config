@@ -21,12 +21,12 @@ async function main() {
       credential: applicationDefault(),
     });
 
-    let localConfigFile = "";
     try {
       const config = getRemoteConfig();
-      template = config.createTemplateFromJSON(
+      const template = config.createTemplateFromJSON(
         fs.readFileSync("/github/workspace/remote_config.json", "UTF8")
       );
+      console.log({ template });
       currentConfig = await config.publishTemplate(template);
     } catch (err) {
       console.error(err);
