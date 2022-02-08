@@ -23,11 +23,21 @@ async function main() {
 
     try {
       const config = getRemoteConfig();
-      const template = config.createTemplateFromJSON(
-        fs.readFileSync("/github/workspace/remote_config.json", "UTF8")
+      var currentTemplate = await config.getTemplate();
+      // const template = config.createTemplateFromJSON(
+      //   fs.readFileSync("/github/workspace/remote_config.json", "UTF8")
+      // );
+      const templateJson = {
+        ...JSON.parse(
+          fs.readFileSync("/github/workspace/remote_config.json", "utf8")
+        ),
+        // 更新操作に必要
+        etag: currentTemplate.etag,
+      };
+      console.log({ templateJson });
+      currentConfig = await config.publishTemplate(
+        config.createTemplateFromJSON(JSON.stringify(templateJson))
       );
-      console.log({ template });
-      currentConfig = await config.publishTemplate(template);
       console.log({ currentConfig });
     } catch (err) {
       console.error(err);
