@@ -28,6 +28,7 @@ async function main() {
       );
       console.log({ template });
       currentConfig = await config.publishTemplate(template);
+      console.log({ currentConfig });
     } catch (err) {
       console.error(err);
       throw err;
