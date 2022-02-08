@@ -1,0 +1,15 @@
+{
+  "name": "apply_remote_config",
+  "version": "1.0.0",
+  "description": "Apply Remote Config from code",
+  "author": "SugiKent",
+  "main": "apply.js",
+  "scripts": {
+    "applyDiff": "node apply.js"
+  },
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "firebase-admin": "^10.0.2"
+  }
+}

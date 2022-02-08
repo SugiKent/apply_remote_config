@@ -1,0 +1,9 @@
+name: "Apply json to Remote Config"
+author: "SugiKent"
+description: "apply remote config json."
+runs:
+  using: "docker"
+  image: "Dockerfile"
+branding:
+  icon: "file"
+  color: "blue"
