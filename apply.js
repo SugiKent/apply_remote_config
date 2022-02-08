@@ -24,9 +24,6 @@ async function main() {
     try {
       const config = getRemoteConfig();
       var currentTemplate = await config.getTemplate();
-      // const template = config.createTemplateFromJSON(
-      //   fs.readFileSync("/github/workspace/remote_config.json", "UTF8")
-      // );
       const templateJson = {
         ...JSON.parse(
           fs.readFileSync("/github/workspace/remote_config.json", "utf8")
