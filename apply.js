@@ -7,6 +7,22 @@ const github = require("@actions/github");
 async function main() {
   try {
     console.log("Start");
+    const token = process.env["GITHUB_TOKEN"];
+    if (!token) {
+      console.error("GITHUB_TOKEN not exist");
+      return;
+    }
+    const octokit = new github.getOctokit(token);
+    const repoWithOwner = process.env["GITHUB_REPOSITORY"];
+    const [owner, repo] = repoWithOwner.split("/");
+    const pr_number = process.env.PR_NUMBER;
+    let commentBody = "Apply Start!";
+    const response = await octokit.rest.issues.createComment({
+      owner,
+      repo,
+      issue_number: pr_number,
+      body: commentBody,
+    });
 
     try {
       const decoded = atob(process.env.BASE64_CREDENTIALS_CONTENT);
@@ -42,17 +58,6 @@ async function main() {
     }
 
     let commentBody = "Apply Success!";
-
-    const token = process.env["GITHUB_TOKEN"];
-    if (!token) {
-      console.error("GITHUB_TOKEN not exist");
-      return;
-    }
-    const octokit = new github.getOctokit(token);
-    const repoWithOwner = process.env["GITHUB_REPOSITORY"];
-    const [owner, repo] = repoWithOwner.split("/");
-
-    const pr_number = process.env.PR_NUMBER;
     const response = await octokit.rest.issues.createComment({
       owner,
       repo,
