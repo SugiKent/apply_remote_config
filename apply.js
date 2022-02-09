@@ -63,7 +63,7 @@ async function main() {
       throw err;
     }
 
-    commentPR("Apply Success!");
+    commentPR("Apply Success!\n Applied" + targetFile);
     console.log("Finished");
   } catch (error) {
     core.setFailed(error.message);
