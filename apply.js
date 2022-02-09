@@ -41,12 +41,14 @@ async function main() {
       credential: applicationDefault(),
     });
 
+    const targetFile = process.env.TARGET_FILE || "remote_config.json";
+
     try {
       const config = getRemoteConfig();
       var currentTemplate = await config.getTemplate();
       const templateJson = {
         ...JSON.parse(
-          fs.readFileSync("/github/workspace/remote_config.json", "utf8")
+          fs.readFileSync(`/github/workspace/${targetFile}`, "utf8")
         ),
         // 更新操作に必要
         etag: currentTemplate.etag,
